@@ -1,0 +1,115 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+
+print (df1.info())
+
+x= df1.iloc [:,2:4].values
+print (x)
+
+y = df1.iloc[:,4].values
+print (y)
+
+plt.scatter (x[y == 0,0],x[y == 0,1] ,s = 100, c='r', label = 'Cluster 1')
+plt.scatter (x[y == 1,0],x[y == 1,1] ,s = 100, c='b', label = 'Cluster 2')
+plt.show()
+
+from sklearn.preprocessing import StandardScaler
+sc_x= StandardScaler()
+x = sc_x.fit_transform(x)
+print (x)
+
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size= 0.2)
+print (x.shape)
+print (x_train.shape)
+print (x_test.shape)
+print (y_train.shape)
+print (y_test.shape)
+
+from sklearn.neighbors import KNeighborsClassifier
+KNN =  KNeighborsClassifier()
+KNN.fit (x_train , y_train)
+
+y_pred = KNN.predict(x_test)
+print (y_pred)
+
+y_test
+
+y_pred = KNN.predict(x)
+print (y_pred)
+
+df_ypred = pd.DataFrame(y_pred,columns = ['Y Pred'])
+result = pd.concat ([df1,df_ypred],axis = 1 )
+result.to_excel('C:\\Noble\\Training\\Acmegrade\\Data Science\\10 Dec 2022\\DS Day9\\KNN_Social_Network_Ads.xlsx')
+print (result.head(50))
+
+df_ypred = pd.DataFrame(y_pred,columns = ['Y Pred'])
+result = pd.concat ([df1,df_ypred],axis = 1 )
+result.to_excel('C:/Noble/Training/Acmegrade/Data Science/10 Dec 2022/DS Day9/KNN_Social_Network_Ads.xlsx')
+print (result.head(50))
+
+y_pred = KNN.predict (x_test)
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score (y_test,y_pred)
+print (accuracy)
+
+y_pred = KNN.predict (x)
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score (y,y_pred)
+print (accuracy)
+
+from sklearn.metrics import classification_report
+print(classification_report (y,y_pred, zero_division=0))
+
+cm = confusion_matrix (y,y_pred)
+print (cm)
+
+(220+58)/400
+
+from sklearn.neighbors import KNeighborsClassifier
+KNN1 = KNeighborsClassifier(n_neighbors =1 , metric = 'minkowski', p= 1)
+KNN1.fit(x_train,y_train)
+print (KNN1)
+
+y_pred = KNN1.predict(x)
+print (y_pred)
+
+accuracy = accuracy_score (y,y_pred)
+print (accuracy)
+
+cm = confusion_matrix (y,y_pred)
+print (cm)
+
+plt.scatter (x[y == 0,0],x[y == 0,1] ,s = 100, c='r', label = 'Cluster 1')
+plt.scatter (x[y == 1,0],x[y == 1,1] ,s = 100, c='b', label = 'Cluster 2')
+plt.show()
+
+plt.scatter (x[y_pred == 0,0],x[y_pred == 0,1] ,s = 100, c='r', label = 'Cluster 1')
+plt.scatter (x[y_pred == 1,0],x[y_pred == 1,1] ,s = 100, c='b', label = 'Cluster 2')
+plt.show()
+
+from sklearn.neighbors import KNeighborsClassifier
+KNN5= KNeighborsClassifier(n_neighbors =5 , metric = 'minkowski', p= 1)
+KNN5.fit(x_train,y_train)
+y_pred5 = KNN5.predict(x)
+print (y_pred5)
+
+accuracy = accuracy_score (y,y_pred5)
+print (accuracy)
+
+
+cm = confusion_matrix (y,y_pred5)
+print (cm)
+
+from sklearn.metrics import classification_report
+print(classification_report (y,y_pred5, zero_division=0))
+
+plt.scatter (x[y_pred5 == 0,0],x[y_pred5== 0,1] ,s = 100, c='r', label = 'Cluster 1')
+plt.scatter (x[y_pred5 == 1,0],x[y_pred5 == 1,1] ,s = 100, c='b', label = 'Cluster 2')
+plt.show()
+
